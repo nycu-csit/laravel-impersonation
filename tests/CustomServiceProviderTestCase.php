@@ -42,7 +42,7 @@ class CustomServiceProviderTestCase extends BaseTestCase
     protected function getPackageProviders($app)
     {
         return [
-            CustomImpersonationServiceProvider::class
+            CustomImpersonationServiceProvider::class,
         ];
     }
 }

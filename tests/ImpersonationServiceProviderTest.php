@@ -2,8 +2,6 @@
 
 namespace NycuCsit\Impersonation\Tests;
 
-use NycuCsit\Impersonation\Tests\TestCase;
-
 class ImpersonationServiceProviderTest extends TestCase
 {
     public function setUp(): void

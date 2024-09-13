@@ -2,7 +2,6 @@
 
 namespace NycuCsit\Impersonation\Tests;
 
-use NycuCsit\Impersonation\Tests\TestCase;
 use Workbench\App\Models\User;
 use Illuminate\Support\Facades\Auth;
 

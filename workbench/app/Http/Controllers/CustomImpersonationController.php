@@ -16,8 +16,8 @@ class CustomImpersonationController extends Controller
         }
 
         $groups = collect(json_decode($user->groups));
-        return $groups->contains(function ($group) {
-            return in_array($group, $this->impersonableRoles);
-        });
+        return $groups->contains(
+            fn ($group) => in_array($group, $this->impersonableRoles)
+        );
     }
 }

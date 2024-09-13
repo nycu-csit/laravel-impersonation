@@ -20,5 +20,5 @@ return [
      */
     'display_columns' => [
         //
-    ]
+    ],
 ];
