@@ -6,6 +6,11 @@ return [
      */
     'enabled' => true,
 
+    /**
+     * Role name for admin
+     */
+    'admin_role' => 'admin',
+
 
     /**
      * The path to redirect to after impersonation.

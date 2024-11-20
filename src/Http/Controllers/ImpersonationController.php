@@ -54,7 +54,7 @@ class ImpersonationController extends Controller
      */
     public function canImpersonate(?Model $user): bool
     {
-        return $user?->role === 'admin';
+        return $user?->role === config('impersonation.admin_role');
     }
 
     /**
