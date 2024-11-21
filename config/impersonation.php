@@ -21,4 +21,12 @@ return [
     'display_columns' => [
         //
     ],
+
+
+    /**
+     * The impersonation policy to override.
+     *
+     * Refer to README.md to see how to implement.
+     */
+    // 'policy' => App\Policies\ImpersonationPolicy::class,
 ];
