@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ImpersonationController extends Controller
 {
@@ -20,7 +21,7 @@ class ImpersonationController extends Controller
      */
     public function listUser()
     {
-        abort_if(!$this->canImpersonate(Auth::user()), 401);
+        Gate::authorize('impersonate', Auth::user());
 
         $users = $this->getUsers();
         $columns = $this->getTableColumns();
@@ -38,23 +39,12 @@ class ImpersonationController extends Controller
      */
     public function impersonateUser(Request $request)
     {
-        abort_if(!$this->canImpersonate(Auth::user()), 401);
+        Gate::authorize('impersonate', Auth::user());
 
         $id = $request->input('id');
         Auth::loginUsingId($id);
 
         return redirect(config('impersonation.post_impersonation_route', '/'));
-    }
-
-    /**
-     * Determine whether the user has the ability to impersonate other user.
-     *
-     * @param Model $user The user to be determine.
-     * @return bool The user is able to impersonate.
-     */
-    public function canImpersonate(?Model $user): bool
-    {
-        return $user?->role === config('impersonation.admin_role');
     }
 
     /**

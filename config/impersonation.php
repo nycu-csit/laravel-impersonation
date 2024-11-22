@@ -6,10 +6,13 @@ return [
      */
     'enabled' => true,
 
+
     /**
-     * Role name for admin
+     * Roles that can impersonate as other users.
+     *
+     * Note: this might have no use if `policy` is provided.
      */
-    'admin_role' => 'admin',
+    'impersonable_roles' => ['admin'],
 
 
     /**
@@ -26,4 +29,12 @@ return [
     'display_columns' => [
         //
     ],
+
+
+    /**
+     * The impersonation policy to override.
+     *
+     * Refer to README.md to see how to implement.
+     */
+    // 'policy' => App\Policies\ImpersonationPolicy::class,
 ];

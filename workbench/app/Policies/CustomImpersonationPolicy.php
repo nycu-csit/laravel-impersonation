@@ -1,15 +1,18 @@
 <?php
 
-namespace Workbench\App\Http\Controllers;
+namespace Workbench\App\Policies;
 
-use Illuminate\Database\Eloquent\Model;
-use NycuCsit\Impersonation\Http\Controllers\ImpersonationController as Controller;
+use NycuCsit\Impersonation\Interfaces\ImpersonationPolicyInterface;
+use Workbench\App\Models\CustomUser;
 
-class CustomImpersonationController extends Controller
+/**
+ * @implements ImpersonationPolicyInterface<CustomUser>
+ */
+class CustomImpersonationPolicy implements ImpersonationPolicyInterface
 {
     protected $impersonableRoles = ['root', 'sudo'];
 
-    public function canImpersonate(?Model $user): bool
+    public function impersonate($user): bool
     {
         if (is_null($user) || is_null($user->groups)) {
             return false;

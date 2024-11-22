@@ -4,7 +4,7 @@ namespace NycuCsit\Impersonation\Tests;
 
 use Illuminate\Support\Facades\Auth;
 use Workbench\App\Models\CustomUser;
-use NycuCsit\Impersonation\Tests\CustomServiceProviderTestCase as TestCase;
+use NycuCsit\Impersonation\Tests\CustomImpersonationPolicyTestCase as TestCase;
 
 class CustomImpersonationTest extends TestCase
 {
@@ -20,7 +20,7 @@ class CustomImpersonationTest extends TestCase
     public function testCanImpersonate()
     {
         $anonymousResponse = $this->get('/impersonation');
-        $anonymousResponse->assertStatus(401);
+        $anonymousResponse->assertStatus(403);
 
         $rootResponse = $this->actingAs($this->root)->get('/impersonation');
         $rootResponse->assertStatus(200);
@@ -29,7 +29,7 @@ class CustomImpersonationTest extends TestCase
         $sudoResponse->assertStatus(200);
 
         $wwwDataResponse = $this->actingAs($this->wwwData)->get('/impersonation');
-        $wwwDataResponse->assertStatus(401);
+        $wwwDataResponse->assertStatus(403);
     }
 
     public function testImpersonationStatus()
@@ -37,7 +37,7 @@ class CustomImpersonationTest extends TestCase
         $rootUuid = $this->root->uuid;
 
         $this->post('/impersonation', ['id' => $rootUuid])
-            ->assertStatus(401);
+            ->assertStatus(403);
 
         $this->actingAs($this->root)
             ->post('/impersonation', ['id' => $rootUuid])
@@ -51,7 +51,7 @@ class CustomImpersonationTest extends TestCase
 
         $this->actingAs($this->wwwData)
             ->post('/impersonation', ['id' => $rootUuid])
-            ->assertStatus(401);
+            ->assertStatus(403);
     }
 
     public function testUserList()

@@ -18,10 +18,10 @@ class ImpersonationTest extends TestCase
     public function testCanImpersonate()
     {
         $anonymousResponse = $this->get('/impersonation');
-        $anonymousResponse->assertStatus(401);
+        $anonymousResponse->assertStatus(403);
 
         $userResponse = $this->actingAs($this->user)->get('/impersonation');
-        $userResponse->assertStatus(401);
+        $userResponse->assertStatus(403);
 
         $adminResponse = $this->actingAs($this->admin)->get('/impersonation');
         $adminResponse->assertStatus(200);
@@ -30,11 +30,11 @@ class ImpersonationTest extends TestCase
     public function testImpersonationStatus()
     {
         $this->post('/impersonation', ['id' => 1])
-          ->assertStatus(401);
+          ->assertStatus(403);
 
         $this->actingAs($this->user)
           ->post('/impersonation', ['id' => 1])
-          ->assertStatus(401);
+          ->assertStatus(403);
 
         $this->actingAs($this->admin)
           ->post('/impersonation', ['id' => 1])

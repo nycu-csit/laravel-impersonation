@@ -26,15 +26,6 @@ Add following lines to your `composer.json`:
     }
 ```
 
-Then add following lines to `config/app.php`:
-
-```php
-    'providers' => [
-        // ...
-        NycuCsit\Impersonation\ImpersonationServiceProvider::class
-    ],
-```
-
 ## Configuration
 
 ```shell
@@ -44,8 +35,10 @@ php artisan vendor:publish --tag=impersonation
 Available options:
 
 - `enabled`: Whether to enable this package or not.
+- `impersonable_roles`: Array of role names that can impersonate as other users.
 - `post_impersonation_route`: The path to redirect to after impersonation.
 - `display_columns`: Array of columns getting displayed. Leave empty for showing all columns.
+- `policy`: The policy class to decide which user can impersonate others.
 
 ## Test
 
@@ -53,10 +46,32 @@ Available options:
 ./vendor/bin/phpunit
 ```
 
-## Customization
+## Customize Policy
 
-To customize the behaviour of the controller, you have to
+Create file `app/Policies/ImpersonationPolicy.php`, the policy should implement `NycuCsit\Impersonation\Policies\ImpersonationPolicyInterface`.
+Here is an example of letting those users who has the role of `admin` could impersonate as other users.
 
-1. Write a controller that extends the controller from this package. (see: [workbench/app/Http/Controllers/CustomImpersonationController.php](./workbench/app/Http/Controllers/CustomImpersonationController.php))
-2. Write a service provider that extends the service provider from this package and bind the controller to your version. (see: [workbench/app/Providers/CustomImpersonationServiceProvider.php](./workbench/app/Providers/CustomImpersonationServiceProvider.php))
-3. Register your version of service provider to `config/app.php`.
+```php
+<?php
+
+namespace App\Policies;
+
+use App\User;
+use NycuCsit\Impersonation\Interfaces\ImpersonationPolicyInterface;
+
+/**
+ * @implements ImpersonationPolicyInterface<User>
+ */
+class ImpersonationPolicy implements ImpersonationPolicyInterface
+{
+    public function impersonate($user): bool
+    {
+        $roles = $user->roles()->pluck('name');
+        return $roles->contains(
+            fn ($role) => in_array($role, ['admin'])
+        );
+    }
+}
+```
+
+For more examples, you can see [workbench/app/Policies/CustomImpersonationPolicy.php](./workbench/app/Policies/CustomImpersonationPolicy.php).
