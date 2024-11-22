@@ -8,6 +8,12 @@ return [
 
 
     /**
+     * Role name for admin
+     */
+    'admin_role' => 'admin',
+
+
+    /**
      * The path to redirect to after impersonation.
      */
     'post_impersonation_route' => '/',
