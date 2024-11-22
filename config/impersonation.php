@@ -9,6 +9,8 @@ return [
 
     /**
      * Roles that can impersonate as other users.
+     *
+     * Note: this might have no use if `policy` is provided.
      */
     'impersonable_roles' => ['admin'],
 

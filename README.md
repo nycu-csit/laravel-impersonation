@@ -35,6 +35,7 @@ php artisan vendor:publish --tag=impersonation
 Available options:
 
 - `enabled`: Whether to enable this package or not.
+- `impersonable_roles`: Array of role names that can impersonate as other users.
 - `post_impersonation_route`: The path to redirect to after impersonation.
 - `display_columns`: Array of columns getting displayed. Leave empty for showing all columns.
 - `policy`: The policy class to decide which user can impersonate others.
