@@ -8,9 +8,9 @@ return [
 
 
     /**
-     * Role name for admin
+     * Roles that can impersonate as other users.
      */
-    'admin_role' => 'admin',
+    'impersonable_roles' => ['admin'],
 
 
     /**

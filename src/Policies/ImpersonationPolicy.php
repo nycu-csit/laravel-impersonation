@@ -12,6 +12,9 @@ class ImpersonationPolicy implements ImpersonationPolicyInterface
 {
     public function impersonate($user): bool
     {
-        return $user?->role === 'admin';
+        return in_array(
+            $user?->role,
+            config('impersonation.impersonable_roles')
+        );
     }
 }
