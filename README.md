@@ -22,7 +22,7 @@ Add following lines to your `composer.json`:
         }
     ],
     "require": {
-        "nycu-csit/laravel-impersonation": "^1.0.0"
+        "nycu-csit/laravel-impersonation": "^2.0.0"
     }
 ```
 
