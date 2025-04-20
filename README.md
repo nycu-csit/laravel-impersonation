@@ -6,7 +6,7 @@ This package is aimed for role-based Laravel site, enabling user to impersonate 
 
 This package will register a route of `/impersonation`, which list all of the users.
 
-After impersonating as an user, you have to logout then login again in order to getting back to your accout.
+After impersonating as an user, you have to logout then login again in order to getting back to your account.
 
 Since this package uses `Auth::loginUsingId()`, when impersonating, the user getting impersonated will be shown on the debugbar.
 
@@ -22,7 +22,7 @@ Add following lines to your `composer.json`:
         }
     ],
     "require": {
-        "nycu-csit/laravel-impersonation": "^2.0.0"
+        "nycu-csit/laravel-impersonation": "^3.0.0"
     }
 ```
 
@@ -37,8 +37,7 @@ Available options:
 - `enabled`: Whether to enable this package or not.
 - `impersonable_roles`: Array of role names that can impersonate as other users.
 - `post_impersonation_route`: The path to redirect to after impersonation.
-- `display_columns`: Array of columns getting displayed. Leave empty for showing all columns.
-- `policy`: The policy class to decide which user can impersonate others.
+- `display_columns`: Array of column names getting displayed when visiting `/impersonation`. Leave empty to show all columns.
 
 ## Test
 
@@ -46,32 +45,33 @@ Available options:
 ./vendor/bin/phpunit
 ```
 
-## Customize Policy
+## Customize Impersonation Policy
 
-Create file `app/Policies/ImpersonationPolicy.php`, the policy should implement `NycuCsit\Impersonation\Policies\ImpersonationPolicyInterface`.
-Here is an example of letting those users who has the role of `admin` could impersonate as other users.
+This package uses [policy discovery](https://laravel.com/docs/12.x/authorization#policy-discovery) mechanism provided by Laravel.
+That is, if the user model is called `User` in your app, you should implement `impersonate(User $user): bool` in `UserPolicy`.
 
-```php
-<?php
+For example, in `app/Policies/UserPolicy.php`, you should either
 
-namespace App\Policies;
+1. use the trait [`NycuCsit\Impersonation\Traits\ImpersonationPolicyTrait`](./src/Traits/ImpersonationPolicyTrait.php), or
+2. provide custom impersonation logic like the following snippet
 
-use App\User;
-use NycuCsit\Impersonation\Interfaces\ImpersonationPolicyInterface;
+   ```php
+   <?php
 
-/**
- * @implements ImpersonationPolicyInterface<User>
- */
-class ImpersonationPolicy implements ImpersonationPolicyInterface
-{
-    public function impersonate($user): bool
-    {
-        $roles = $user->roles()->pluck('name');
-        return $roles->contains(
-            fn ($role) => in_array($role, ['admin'])
-        );
-    }
-}
-```
+   namespace App\Policies;
 
-For more examples, you can see [workbench/app/Policies/CustomImpersonationPolicy.php](./workbench/app/Policies/CustomImpersonationPolicy.php).
+   use App\Model\User;
+
+   class UserPolicy
+   {
+       public function impersonate(User $user): bool
+       {
+           $roles = $user->roles()->pluck('name');
+           return $roles->contains(
+               fn ($role) => in_array($role, ['admin'])
+           );
+       }
+   }
+   ```
+
+For more examples, you can see [workbench/app/Policies/CustomUserPolicy.php](./workbench/app/Policies/CustomUserPolicy.php).
