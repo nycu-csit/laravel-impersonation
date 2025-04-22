@@ -75,4 +75,4 @@ For example, in `app/Policies/UserPolicy.php`, you should either
    }
    ```
 
-For more examples, you can see [workbench/app/Policies/CustomUserPolicy.php](./workbench/app/Policies/CustomUserPolicy.php).
+For more examples, you can see [workbench/app/Policies/NotAutoDiscoverableCustomUserPolicy.php](./workbench/app/Policies/NotAutoDiscoverableCustomUserPolicy.php).

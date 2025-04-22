@@ -4,7 +4,7 @@ namespace Workbench\App\Policies;
 
 use Workbench\App\Models\CustomUser;
 
-class CustomUserPolicy
+class NotAutoDiscoverableCustomUserPolicy
 {
     protected $impersonableRoles = ['root', 'sudo'];
 

@@ -3,8 +3,8 @@
 namespace NycuCsit\Impersonation\Tests;
 
 use Illuminate\Support\Facades\Auth;
-use Workbench\App\Models\CustomUser;
 use NycuCsit\Impersonation\Tests\CustomImpersonationPolicyTestCase as TestCase;
+use Workbench\App\Models\CustomUser;
 
 class CustomImpersonationTest extends TestCase
 {

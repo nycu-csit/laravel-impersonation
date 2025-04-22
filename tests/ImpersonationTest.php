@@ -2,8 +2,8 @@
 
 namespace NycuCsit\Impersonation\Tests;
 
-use Workbench\App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Workbench\App\Models\User;
 
 class ImpersonationTest extends TestCase
 {
