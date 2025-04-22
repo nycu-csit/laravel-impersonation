@@ -48,7 +48,8 @@ Available options:
 ## Customize Impersonation Policy
 
 This package uses [policy discovery](https://laravel.com/docs/12.x/authorization#policy-discovery) mechanism provided by Laravel.
-That is, if the user model is called `User` in your app, you should implement `impersonate(User $user): bool` in `UserPolicy`.
+That is, by default, if the user model is called `User` in your app, you should implement `impersonate(User $user): bool` in your `UserPolicy` class.
+However, if you bind another policy onto your user model, you should implement `impersonate(User $user): bool` in such policy instead.
 
 For example, in `app/Policies/UserPolicy.php`, you should either
 
