@@ -6,7 +6,6 @@ use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Workbench\App\Models\CustomUser;
-use Workbench\App\Policies\CustomImpersonationPolicy;
 use NycuCsit\Impersonation\Tests\TestCase as BaseTestCase;
 
 class CustomImpersonationPolicyTestCase extends BaseTestCase
@@ -35,8 +34,6 @@ class CustomImpersonationPolicyTestCase extends BaseTestCase
                     'uid',
                     'groups',
                 ],
-
-                'policy' => CustomImpersonationPolicy::class,
             ]);
         });
     }

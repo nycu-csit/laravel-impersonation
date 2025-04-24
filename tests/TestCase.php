@@ -4,8 +4,8 @@ namespace NycuCsit\Impersonation\Tests;
 
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Orchestra\Testbench\TestCase as BaseTestCase;
 use Orchestra\Testbench\Concerns\WithWorkbench;
+use Orchestra\Testbench\TestCase as BaseTestCase;
 use Workbench\App\Models\User;
 
 class TestCase extends BaseTestCase

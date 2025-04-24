@@ -3,9 +3,7 @@
 namespace NycuCsit\Impersonation;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 use NycuCsit\Impersonation\Http\Controllers\ImpersonationController;
-use NycuCsit\Impersonation\Policies\ImpersonationPolicy;
 
 class ImpersonationServiceProvider extends ServiceProvider
 {
@@ -30,7 +28,6 @@ class ImpersonationServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishConfig();
-        $this->registerPolicy();
         $this->bindController();
     }
 
@@ -45,12 +42,6 @@ class ImpersonationServiceProvider extends ServiceProvider
             [__DIR__ . '/../config/impersonation.php' => config_path('impersonation.php')],
             'impersonation'
         );
-    }
-
-    protected function registerPolicy(): void
-    {
-        $userModelName = config('auth.providers.users.model');
-        Gate::policy($userModelName, config('impersonation.policy', ImpersonationPolicy::class));
     }
 
     protected function bindController(): void

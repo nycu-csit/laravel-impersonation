@@ -8,9 +8,10 @@ return [
 
 
     /**
-     * Roles that can impersonate as other users.
+     * Roles that can impersonate as other users when using default policy trait.
      *
-     * Note: this might have no use if `policy` is provided.
+     * Note: this is used by the trait this package provide, so if the impersonation logic is
+     * implemented by yourself, this might have no use.
      */
     'impersonable_roles' => ['admin'],
 
@@ -29,12 +30,4 @@ return [
     'display_columns' => [
         //
     ],
-
-
-    /**
-     * The impersonation policy to override.
-     *
-     * Refer to README.md to see how to implement.
-     */
-    // 'policy' => App\Policies\ImpersonationPolicy::class,
 ];
