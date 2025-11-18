@@ -12,18 +12,8 @@ Since this package uses `Auth::loginUsingId()`, when impersonating, the user get
 
 ## Installation
 
-Add following lines to your `composer.json`:
-
-```json
-    "repositories": [
-        {
-          "type": "vcs",
-          "url": "https://gitlab.it.cs.nycu.edu.tw/nycu-csit/laravel-impersonation"
-        }
-    ],
-    "require": {
-        "nycu-csit/laravel-impersonation": "^3.0.0"
-    }
+```shell
+composer require nycu-csit/laravel-impersonation:^3.0.0
 ```
 
 ## Configuration
