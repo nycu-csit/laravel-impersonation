@@ -13,6 +13,8 @@ class TestCase extends BaseTestCase
     use WithWorkbench;
     use RefreshDatabase;
 
+    protected $seeder = \Workbench\Database\Seeders\DatabaseSeeder::class;
+
     public function setUp(): void
     {
         parent::setUp();

@@ -22,3 +22,6 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 .phpunit.cache
+
+# ignore lockfile (library)
+composer.lock
